@@ -1,5 +1,7 @@
 package stephanie.com.treinamentotestes
 
+import junit.framework.Assert.assertFalse
+import junit.framework.Assert.assertTrue
 import org.junit.Assert
 import org.junit.Test
 
@@ -8,39 +10,44 @@ class PasswordValidatorTest {
 
     @Test
     fun givenPasswordShorterThan8_whenValidate_shouldReturnFalse() {
-        // arrange
-
-        // act
-        val result = passwordValidator.isValid("1234567")
-
-        // assert
+        val result = passwordValidator.isValid("aA3.567")
         Assert.assertFalse(result)
     }
 
     @Test
-    fun giveMePassowrdWithoutUpperCase_whenValidate_shouldReturnFalse() {
+    fun givenPasswordDoesntContainUpperCaseLetter_whenValidate_shouldReturnFalse() {
+        val result = passwordValidator.isValid("aa3.5678av")
 
-        val resultado = passwordValidator
-                .hasUpperCase("nao tem maiusculo")
-
-            Assert.assertFalse(resultado)
+        assertFalse(result)
     }
 
     @Test
-    fun giveMePassowrWhitLowerrCase_whenValidate_shouldReturnFalse(){
-        val resultado = passwordValidator
-                .hasLoweCase("Tem maiusculo")
+    fun givenPasswordDoesntContainLowerCaseLetter_whenValidate_shouldReturnFalse() {
+        val result = passwordValidator.isValid("AA3.5678AV")
 
-        Assert.assertFalse(resultado)
+        assertFalse(result)
     }
 
     @Test
-    fun  givenPasswordContainsANumber_whenValidate_shouldReturnFalse() {
+    fun givenPasswordDoesntContainNumbers_whenValidate_shouldReturnFalse() {
+        val result = passwordValidator.isValid("AAx.xxxxdAV")
 
-        val resultado = passwordValidator
-                .hasNumber("12345")
-        Assert.assertFalse(resultado)
-
+        assertFalse(result)
     }
+
+    @Test
+    fun givenPasswordDoesntContainSpecialCharacter_whenValidate_shouldReturnFalse() {
+        val result = passwordValidator.isValid("Ax3l5678AV")
+
+        assertFalse(result)
+    }
+
+    @Test
+    fun givenPasswordIsValid_whenValidate_shouldReturnTrue() {
+        val result = passwordValidator.isValid("Ax3l.5678AV")
+
+        assertTrue(result)
+    }
+
 
 }
