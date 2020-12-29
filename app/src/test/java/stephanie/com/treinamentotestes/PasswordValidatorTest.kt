@@ -21,7 +21,7 @@ class PasswordValidatorTest {
     fun giveMePassowrdWithoutUpperCase_whenValidate_shouldReturnFalse() {
 
         val resultado = passwordValidator
-                .hasUpperCase("nao tem minusculo")
+                .hasUpperCase("nao tem maiusculo")
 
             Assert.assertFalse(resultado)
     }
@@ -34,5 +34,13 @@ class PasswordValidatorTest {
         Assert.assertFalse(resultado)
     }
 
+    @Test
+    fun  givenPasswordContainsANumber_whenValidate_shouldReturnFalse() {
+
+        val resultado = passwordValidator
+                .hasNumber("12345")
+        Assert.assertFalse(resultado)
+
+    }
 
 }
